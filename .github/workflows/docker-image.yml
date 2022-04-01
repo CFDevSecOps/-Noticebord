@@ -11,12 +11,7 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Push Image
+    - name: Build & Push Image
       run: |
         echo "${{ secrets.DOCKER_ACCESS_TOKEN }}" | docker login -u "cfdevsecopsdemo" --password-stdin
         docker image build -t cfdevsecopsdemo/gitaction:latest .
